@@ -1,0 +1,73 @@
+import random
+
+1_list_of_all_words  = open ( "words.txt" )
+
+2_words_list = [] 
+
+3_secret_word= []
+
+for word in 1_list_of_all_words :
+    2_words_list += word.split()
+
+4_ guess_word = 2_ words_list[random.randint (0, len (words_list))].upper()
+
+3_secret_word= ["*" for i in range(len(4_guess_word))]
+
+5_guess = 7
+
+count = 0 
+
+print(
+    """
+    ----------------------------------
+    |         Welcome                |
+    |             To                 |
+    |          Richard's             |
+    |            Game                |
+    ----------------------------------
+    
+    """)
+
+while 5_guess > 0 and count ! = len(4_guess_word):
+    print("Guess", " - ", "you have" 5_guess, "guesses left") 
+    print(" ".join(3_secret_word)) 
+    5_guess = (input("\nNext guess?: ")).upper()
+    if 5_guess.isalpha():
+        if len(5_guess) != 1: 
+            print("\nDont try and cheat Richard's game. ONE CHARAC TER PLEASE")
+        elif 5_guess in 3_secret_word: 
+            print("\nYou have used that letter already. Duh!")
+        elif 5_guess in 4_guess_word:
+            for chr in range(len(4_guess_word)): 
+                if 5_guess == 4_guess_word[chr]:
+                    3_secret_word[chr] = 4_guess_word[chr].upper() 
+                    count += 1 
+        else: 
+            print("\nINCORRECT Try again")
+            5_guess -= 1
+    else:
+        print("\nINCORRECT use a valid letter")
+
+
+if count == len(4_guess_word):
+    print(
+        """
+    ----------------------------------
+    |          Well done             |
+    |       You have beaten          |
+    |          Richard's             |
+    |            Game                |
+    ----------------------------------
+        """)
+    print("The correct answer is:", "".join(3_secret_word))
+else:
+    print(
+        """
+    ----------------------------------
+    |           Unlucky              |
+    |        You have lost           |
+    |          Richard's             |
+    |            Game                |
+    ----------------------------------
+        """)
+    print("The hidden word was:", "".join(4_guess_word))
